@@ -5,5 +5,5 @@ import PokerHand
 spec :: Spec
 spec = do
     describe "comparer 2 cartes" $ do
-        it "2 est plus petit que 3" $ do
-            "2s" < "3s" `shouldBe` True
+        it "2 est plus petite que 3" $ do
+            "2s" `estPlusPetite` "3s"  `shouldBe` True
