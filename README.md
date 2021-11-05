@@ -46,3 +46,7 @@ If the hand involves fewer than five cards, (such as two pair or three of a kind
     4d 2d Ks Kd 9d 3c 6d Flush
     7s Ts Ks Kd 9d
 
+## TODO
+- Trouver la valeur des cartes
+- Comparer deux chaines de caractères qui représentent une carte
+- Faire un appel de fonction dans le test
