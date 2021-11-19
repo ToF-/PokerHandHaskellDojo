@@ -13,4 +13,6 @@ extraireLaListeDesCouleurs :: [String] -> [Char]
 extraireLaListeDesCouleurs main = map extraireLaCouleurDUneCarte main
 
 aUneRoyalFlush :: [String] -> Bool
-aUneRoyalFlush main = (extraireLaListeDesCouleurs main) == "sssss"
+aUneRoyalFlush main =
+    length main == 5 &&
+    all (==extraireLaCouleurDUneCarte (main!!0)) (extraireLaListeDesCouleurs main)
