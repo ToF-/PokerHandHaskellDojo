@@ -11,3 +11,9 @@ spec = do
     describe "aUneRoyalFlush" $ do
         it "retourne faux si la main a moins de 5 cartes" $ do
             aUneRoyalFlush ["1s", "2s", "3s", "4s"] `shouldBe` False
+
+        it "retourne vrai si la main correspond à 1s,2s,3s,4s,5s" $ do
+            aUneRoyalFlush ["1s", "2s", "3s", "4s", "5s"] `shouldBe` True
+
+        it "retourne faux si la main ne contient pas 5 cartes de la même couleur" $ do
+            aUneRoyalFlush ["1s", "2s", "3s", "4s", "5c"] `shouldBe` False

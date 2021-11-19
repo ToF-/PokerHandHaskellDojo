@@ -7,4 +7,4 @@ estPlusPetite :: Ord a => a -> a -> Bool
 estPlusPetite = (<)
 
 aUneRoyalFlush :: [String] -> Bool
-aUneRoyalFlush main = False
+aUneRoyalFlush main = length main == 5
