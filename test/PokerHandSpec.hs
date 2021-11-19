@@ -15,9 +15,12 @@ spec = do
         it "retourne vrai si la main correspond à 1s,2s,3s,4s,5s" $ do
             aUneRoyalFlush ["1s", "2s", "3s", "4s", "5s"] `shouldBe` True
 
-        it "retourne faux si la dernière carte de la main n'est pas de la même couleur" $ do
-            aUneRoyalFlush ["1s", "2s", "3s", "4s", "5c"] `shouldBe` False
+        it "retourne vrai si la main correspond à 6s,7s,8s,9s,Ts" $ do
+            aUneRoyalFlush ["6s", "7s", "8s", "9s", "Ts"] `shouldBe` True
 
-        it "retourne faux si toutes les cartes ne sont pas de la même couleur" $ do
-            aUneRoyalFlush ["1s", "2s", "3s", "4c", "5s"] `shouldBe` False
+--        it "retourne faux si la dernière carte de la main n'est pas de la même couleur" $ do
+--            aUneRoyalFlush ["1s", "2s", "3s", "4s", "5c"] `shouldBe` False
+--
+--        it "retourne faux si toutes les cartes ne sont pas de la même couleur" $ do
+--            aUneRoyalFlush ["1s", "2s", "3s", "4c", "5s"] `shouldBe` False
 
