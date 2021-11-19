@@ -50,3 +50,8 @@ If the hand involves fewer than five cards, (such as two pair or three of a kind
 - Trouver la valeur des cartes
 - Comparer deux chaines de caractères qui représentent une carte
 - Faire un appel de fonction dans le test
+
+Comparer 2 cartes unitairement :
+Comparer 2 mains -> Pour comparer 2 mains, il faut savoir donner la meilleure catégorie 
+Il faut aussi savoir comparer des combinaisons
+
