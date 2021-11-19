@@ -21,6 +21,13 @@ spec = do
         it "retourne vrai si la main correspond à 6h,7h,8h,9h,Th" $ do
             aUneRoyalFlush ["6h", "7h", "8h", "9h", "Th"] `shouldBe` True
 
+        it "retourne vrai si la main a plus de 5 cartes de la même couleur" $ do
+            aUneRoyalFlush ["6h", "7h", "8h", "9h", "Th", "Jh", "Qh"] `shouldBe` True
+
+        it "retourne vrai si la main a une royal flush et d'autres cartes d'une couleur différente" $ do
+            aUneRoyalFlush ["6h", "7h", "8h", "9h", "Th", "Js", "Qs"] `shouldBe` True
+
+
 --        it "retourne faux si la dernière carte de la main n'est pas de la même couleur" $ do
 --            aUneRoyalFlush ["1s", "2s", "3s", "4s", "5c"] `shouldBe` False
 --
