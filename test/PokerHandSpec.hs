@@ -15,7 +15,7 @@ spec = do
 
     describe "a une straight" $ do
         it "si la main a des cartes qui se suivent" $ do
-            aUneStraight ["2d", "3s", "4s", "5s", "6d"] `shouldBe` True
+            aUneStraight ["2d", "5s", "4s", "3s", "6d"] `shouldBe` True
             aUneStraight ["2d", "8s", "4s", "5s", "6d"] `shouldBe` False
             aUneStraight ["3s", "4s", "5s", "6d", "7d"] `shouldBe` True
 

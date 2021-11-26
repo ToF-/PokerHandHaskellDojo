@@ -1,4 +1,5 @@
 module PokerHand where
+import Data.List (sort)
 
 double :: Integer -> Integer
 double x = 5
@@ -16,12 +17,12 @@ aUneFlush :: [String] -> Bool
 aUneFlush main = all (==extraireLaCouleurDUneCarte (main!!0)) (extraireLaListeDesCouleurs main)
 
 aUneStraight :: [String] -> Bool
-aUneStraight ["2d", "3s", "4s", "5s", "6d"] = True
-aUneStraight ["3s", "4s", "5s", "6d", "7d"] = True
+aUneStraight s | suite s == "23456" = True
+aUneStraight s | suite s == "34567" = True
 aUneStraight _ = False
 
 suite :: [String] -> String
-suite = map (!!0)
+suite = sort . map (!!0)
 
 aUneStraightFlush :: [String] -> Bool
 aUneStraightFlush main =
