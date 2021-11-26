@@ -1,31 +1,37 @@
 module PokerHand where
 import Data.List (sort)
 
+type Main = [String]
+type Carte = String
+type Rang = Char
+type Couleur = Char
+
 double :: Integer -> Integer
 double x = 5
 
 estPlusPetite :: Ord a => a -> a -> Bool
 estPlusPetite = (<)
 
-extraireLaCouleurDUneCarte :: String -> Char
-extraireLaCouleurDUneCarte carte = carte!!1
+couleur :: Carte -> Couleur
+couleur carte = carte!!1
 
-extraireLaListeDesCouleurs :: [String] -> [Char]
-extraireLaListeDesCouleurs main = map extraireLaCouleurDUneCarte main
+extraireLaListeDesCouleurs :: Main -> [Couleur]
+extraireLaListeDesCouleurs main = map couleur main
 
-aUneFlush :: [String] -> Bool
-aUneFlush main = all (==extraireLaCouleurDUneCarte (main!!0)) (extraireLaListeDesCouleurs main)
+aUneFlush :: Main -> Bool
+aUneFlush main = all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
 
-aUneStraight :: [String] -> Bool
-aUneStraight s | suite s == "23456" = True
-aUneStraight s | suite s == "34567" = True
-aUneStraight _ = False
+aUneStraight :: Main -> Bool
+aUneStraight main = and (zipWith estSuccesseur rangTries (tail rangTries))
+    where
+        rangTries = sort (map rang main)
+        estSuccesseur a b = b == succ a
 
-suite :: [String] -> String
-suite = sort . map (!!0)
+rang :: Carte -> Rang
+rang = head
 
-aUneStraightFlush :: [String] -> Bool
+aUneStraightFlush :: Main -> Bool
 aUneStraightFlush main =
     length main >= 5 &&
-    all (==extraireLaCouleurDUneCarte (main!!0)) (extraireLaListeDesCouleurs main)
+    all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
 
