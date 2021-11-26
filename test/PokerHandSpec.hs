@@ -18,6 +18,9 @@ spec = do
             aUneStraight ["2d", "5s", "4s", "3s", "6d"] `shouldBe` True
             aUneStraight ["2d", "8s", "4s", "5s", "6d"] `shouldBe` False
             aUneStraight ["3s", "4s", "5s", "6d", "7d"] `shouldBe` True
+            aUneStraight ["7s", "8s", "9s", "Td", "Jd"] `shouldBe` True
+            aUneStraight ["9s", "Ks", "Ts", "Jd", "Qd"] `shouldBe` True
+
 
 
     describe "aUneStraightFlush" $ do

@@ -3,7 +3,7 @@ import Data.List (sort)
 
 type Main = [String]
 type Carte = String
-type Rang = Char
+type Rang = Integer
 type Couleur = Char
 
 double :: Integer -> Integer
@@ -28,7 +28,23 @@ aUneStraight main = and (zipWith estSuccesseur rangTries (tail rangTries))
         estSuccesseur a b = b == succ a
 
 rang :: Carte -> Rang
-rang = head
+rang = valeur . head
+    where
+        valeur 'T' = 10
+        valeur 'J' = 11
+        valeur 'Q' = 12
+        valeur 'K' = 13
+        valeur 'A' = 14
+        valeur '1' = 1
+        valeur '2' = 2
+        valeur '3' = 3
+        valeur '4' = 4
+        valeur '5' = 5
+        valeur '6' = 6
+        valeur '7' = 7
+        valeur '8' = 8
+        valeur '9' = 9
+
 
 aUneStraightFlush :: Main -> Bool
 aUneStraightFlush main =
