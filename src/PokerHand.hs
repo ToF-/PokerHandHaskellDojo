@@ -21,11 +21,13 @@ extraireLaListeDesCouleurs main = map couleur main
 aUneFlush :: Main -> Bool
 aUneFlush main = all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
 
+rangTries :: Main -> [Rang]
+rangTries = sort . (map rang)
+
 aUneStraight :: Main -> Bool
 aUneStraight main | sort (map rang main) == [2, 3, 4, 5, 14] = True
-aUneStraight main = and (zipWith estSuccesseur rangTries (tail rangTries))
+aUneStraight main = and (zipWith estSuccesseur (rangTries main) (tail (rangTries main)))
     where
-        rangTries = sort (map rang main)
         estSuccesseur a b = b == succ a
 
 rang :: Carte -> Rang
@@ -48,3 +50,5 @@ rang = valeur . head
 aUneStraightFlush :: Main -> Bool
 aUneStraightFlush main = aUneFlush main && aUneStraight main
 
+aUneRoyalFlush :: Main -> Bool
+aUneRoyalFlush main = aUneStraightFlush main && minimum (rangTries main) == 10

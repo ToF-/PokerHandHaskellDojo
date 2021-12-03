@@ -27,3 +27,8 @@ spec = do
         it "si la main a des rangs successifs et une couleur unique" $ do
             aUneStraightFlush (words "6h 8h Th 7h 9h") `shouldBe` True
             aUneStraightFlush (words "6h 8h Ts 7h 9h") `shouldBe` False
+
+    describe "aUneRoyalFlush" $ do
+        it "si la main a une straight flush finisant par l'As" $ do
+            aUneRoyalFlush (words "6h 8h Th 7h 9h") `shouldBe` False
+            aUneRoyalFlush (words "Kh Jh Ah Th Qh") `shouldBe` True
