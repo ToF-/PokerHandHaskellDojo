@@ -46,7 +46,5 @@ rang = valeur . head
         valeur 'A' = 14
 
 aUneStraightFlush :: Main -> Bool
-aUneStraightFlush main =
-    length main >= 5 &&
-    all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
+aUneStraightFlush main = aUneFlush main && aUneStraight main
 
