@@ -22,6 +22,7 @@ aUneFlush :: Main -> Bool
 aUneFlush main = all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
 
 aUneStraight :: Main -> Bool
+aUneStraight main | sort (map rang main) == [2, 3, 4, 5, 14] = True
 aUneStraight main = and (zipWith estSuccesseur rangTries (tail rangTries))
     where
         rangTries = sort (map rang main)
@@ -30,12 +31,6 @@ aUneStraight main = and (zipWith estSuccesseur rangTries (tail rangTries))
 rang :: Carte -> Rang
 rang = valeur . head
     where
-        valeur 'T' = 10
-        valeur 'J' = 11
-        valeur 'Q' = 12
-        valeur 'K' = 13
-        valeur 'A' = 14
-        valeur '1' = 1
         valeur '2' = 2
         valeur '3' = 3
         valeur '4' = 4
@@ -44,7 +39,11 @@ rang = valeur . head
         valeur '7' = 7
         valeur '8' = 8
         valeur '9' = 9
-
+        valeur 'T' = 10
+        valeur 'J' = 11
+        valeur 'Q' = 12
+        valeur 'K' = 13
+        valeur 'A' = 14
 
 aUneStraightFlush :: Main -> Bool
 aUneStraightFlush main =
