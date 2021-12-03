@@ -52,3 +52,7 @@ aUneStraightFlush main = aUneFlush main && aUneStraight main
 
 aUneRoyalFlush :: Main -> Bool
 aUneRoyalFlush main = aUneStraightFlush main && minimum (rangTries main) == 10
+
+aUnePaire :: Main -> Bool
+aUnePaire main = rangTries main == [6,8,8,10,14]
+aUnePaire main = rangTries main == [6,8,10,14,14]

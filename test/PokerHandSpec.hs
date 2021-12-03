@@ -32,3 +32,9 @@ spec = do
         it "si la main a une straight flush finisant par l'As" $ do
             aUneRoyalFlush (words "6h 8h Th 7h 9h") `shouldBe` False
             aUneRoyalFlush (words "Kh Jh Ah Th Qh") `shouldBe` True
+
+    describe "aUnePaire" $ do
+        it "si la main a une paire" $ do
+            aUnePaire (words "6h 8h 8d As Tc") `shouldBe` True
+            aUnePaire (words "6h 8h 5d As Tc") `shouldBe` False
+            aUnePaire (words "6h 8h Ad As Tc") `shouldBe` True
