@@ -1,5 +1,6 @@
 module PokerHand where
-import Data.List (sort)
+import Data.List (sort,sortBy,group)
+import Data.Ord (comparing)
 
 type Main = [String]
 type Carte = String
@@ -54,5 +55,9 @@ aUneRoyalFlush :: Main -> Bool
 aUneRoyalFlush main = aUneStraightFlush main && minimum (rangTries main) == 10
 
 aUnePaire :: Main -> Bool
-aUnePaire main = rangTries main == [6,8,8,10,14]
-aUnePaire main = rangTries main == [6,8,10,14,14]
+aUnePaire main = aUnePaireDeRangs (regroupeParRang main)
+    where 
+        aUnePaireDeRangs [[_,_],[_],[_],[_]] = True
+        aUnePaireDeRangs _ = False
+
+regroupeParRang = reverse . sortBy (comparing length) . group . rangTries 
