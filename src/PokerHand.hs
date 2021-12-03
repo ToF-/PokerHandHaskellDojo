@@ -7,6 +7,9 @@ type Carte = String
 type Rang = Integer
 type Couleur = Char
 
+data HandCategory = Highcard | OnePair |  Straight | Flush | StraightFlush | RoyalFlush
+    deriving (Show, Ord, Eq)
+
 double :: Integer -> Integer
 double x = 5
 
@@ -56,8 +59,9 @@ aUneRoyalFlush main = aUneStraightFlush main && minimum (rangTries main) == 10
 
 aUnePaire :: Main -> Bool
 aUnePaire main = aUnePaireDeRangs (regroupeParRang main)
-    where 
+    where
         aUnePaireDeRangs [[_,_],[_],[_],[_]] = True
         aUnePaireDeRangs _ = False
 
-regroupeParRang = reverse . sortBy (comparing length) . group . rangTries 
+regroupeParRang :: Main -> [[Rang]]
+regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
