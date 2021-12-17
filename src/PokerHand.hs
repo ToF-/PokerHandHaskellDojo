@@ -7,7 +7,7 @@ type Carte = String
 type Rang = Integer
 type Couleur = Char
 
-data Categorie = CarteHaute | Paire | DoublePaire |  Quinte | Couleur | QuinteFlush | QuinteFlushRoyale
+data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | QuinteFlush | QuinteFlushRoyale
     deriving (Show, Ord, Eq)
 
 double :: Integer -> Integer
@@ -28,9 +28,9 @@ aUneFlush main = all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
 rangTries :: Main -> [Rang]
 rangTries = sort . (map rang)
 
-aUneStraight :: Main -> Bool
-aUneStraight main | sort (map rang main) == [2, 3, 4, 5, 14] = True
-aUneStraight main = and (zipWith estSuccesseur (rangTries main) (tail (rangTries main)))
+aUneQuinte :: Main -> Bool
+aUneQuinte main | sort (map rang main) == [2, 3, 4, 5, 14] = True
+aUneQuinte main = and (zipWith estSuccesseur (rangTries main) (tail (rangTries main)))
     where
         estSuccesseur a b = b == succ a
 
@@ -51,17 +51,28 @@ rang = valeur . head
         valeur 'K' = 13
         valeur 'A' = 14
 
-aUneStraightFlush :: Main -> Bool
-aUneStraightFlush main = aUneFlush main && aUneStraight main
+aUneQuinteFlush :: Main -> Bool
+aUneQuinteFlush main = aUneFlush main && aUneQuinte main
 
 aUneRoyalFlush :: Main -> Bool
-aUneRoyalFlush main = aUneStraightFlush main && minimum (rangTries main) == 10
+aUneRoyalFlush main = aUneQuinteFlush main && minimum (rangTries main) == 10
+
+aUneDoublePaire :: Main -> Bool
+aUneDoublePaire main = aUneDoublePaireDeRangs (regroupeParRang main)
+    where aUneDoublePaireDeRangs [[_,_],[_,_],[_]] = True
+          aUneDoublePaireDeRangs _ = False
 
 aUnePaire :: Main -> Bool
 aUnePaire main = aUnePaireDeRangs (regroupeParRang main)
     where
         aUnePaireDeRangs [[_,_],[_],[_],[_]] = True
         aUnePaireDeRangs _ = False
+
+aUnBrelan :: Main -> Bool
+aUnBrelan main = aUnBrelanDeRangs (regroupeParRang main)
+    where
+        aUnBrelanDeRangs [[_,_,_],[_],[_]] = True
+        aUnBrelanDeRangs _ = False
 
 regroupeParRang :: Main -> [[Rang]]
 regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
@@ -71,4 +82,7 @@ trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
 
 categorieDeMain :: Main -> Categorie
 categorieDeMain m | aUnePaire m = Paire
+                  | aUneDoublePaire m = DoublePaire
+                  | aUnBrelan m = Brelan
+                  | aUneQuinte m = Quinte
                   | otherwise = CarteHaute

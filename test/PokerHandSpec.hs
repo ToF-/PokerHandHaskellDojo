@@ -15,18 +15,18 @@ spec = do
 
     describe "a une straight" $ do
         it "si la main a des cartes qui se suivent" $ do
-            aUneStraight ["2d", "5s", "4s", "3s", "6d"] `shouldBe` True
-            aUneStraight ["2d", "8s", "4s", "5s", "6d"] `shouldBe` False
-            aUneStraight ["3s", "4s", "5s", "6d", "7d"] `shouldBe` True
-            aUneStraight ["7s", "8s", "9s", "Td", "Jd"] `shouldBe` True
-            aUneStraight ["9s", "Ks", "Ts", "Jd", "Qd"] `shouldBe` True
-            aUneStraight ["3s", "2s", "4s", "Ad", "5d"] `shouldBe` True
-            aUneStraight ["As", "Ks", "Ts", "Jd", "Qd"] `shouldBe` True
+            aUneQuinte ["2d", "5s", "4s", "3s", "6d"] `shouldBe` True
+            aUneQuinte ["2d", "8s", "4s", "5s", "6d"] `shouldBe` False
+            aUneQuinte ["3s", "4s", "5s", "6d", "7d"] `shouldBe` True
+            aUneQuinte ["7s", "8s", "9s", "Td", "Jd"] `shouldBe` True
+            aUneQuinte ["9s", "Ks", "Ts", "Jd", "Qd"] `shouldBe` True
+            aUneQuinte ["3s", "2s", "4s", "Ad", "5d"] `shouldBe` True
+            aUneQuinte ["As", "Ks", "Ts", "Jd", "Qd"] `shouldBe` True
 
-    describe "aUneStraightFlush" $ do
+    describe "aUneQuinteFlush" $ do
         it "si la main a des rangs successifs et une couleur unique" $ do
-            aUneStraightFlush (words "6h 8h Th 7h 9h") `shouldBe` True
-            aUneStraightFlush (words "6h 8h Ts 7h 9h") `shouldBe` False
+            aUneQuinteFlush (words "6h 8h Th 7h 9h") `shouldBe` True
+            aUneQuinteFlush (words "6h 8h Ts 7h 9h") `shouldBe` False
 
     describe "aUneRoyalFlush" $ do
         it "si la main a une straight flush finisant par l'As" $ do
@@ -47,6 +47,11 @@ spec = do
             categorieDeMain (words "6h 8h 9d As Tc") `shouldBe` CarteHaute
         it "retourne DoublePaire si la main contient deux paires" $ do
             categorieDeMain (words "6h 8h 8d As Ac") `shouldBe` DoublePaire
+        it "retourne Brelan si la main contient un brelan" $ do
+            categorieDeMain (words "6h 8h 8d 8s Tc") `shouldBe` Brelan
+        it "retourne Quinte si la main contient un quinte" $ do
+            categorieDeMain (words "3h 4h 5d 6s 7c") `shouldBe` Quinte
+
 
     describe "trouverLaMainLaPlusForte" $ do
         it "retourner QuinteFlushRoyale quand les paramètres sont QuinteFlush, QuinteFlushRoyale" $ do
