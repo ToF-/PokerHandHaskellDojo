@@ -39,3 +39,6 @@ spec = do
             aUnePaire (words "6h 8h 5d As Tc") `shouldBe` False
             aUnePaire (words "6h 8h Ad As Tc") `shouldBe` True
             aUnePaire (words "6h 3h 8d As 3c") `shouldBe` True
+
+    describe "trouverLaMainLaPlusForte" $ do
+        it ""
