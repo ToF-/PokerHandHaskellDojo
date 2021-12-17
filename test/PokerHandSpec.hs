@@ -10,8 +10,8 @@ spec = do
 
     describe "a une flush" $ do
         it "si la main a toutes ses cartes de la même couleur" $ do
-            aUneFlush ["As", "2s", "8s", "4s", "Ts"] `shouldBe` True
-            aUneFlush ["As", "Qs", "3h", "4s", "5s"] `shouldBe` False
+            aUneCouleur ["As", "2s", "8s", "4s", "Ts"] `shouldBe` True
+            aUneCouleur ["As", "Qs", "3h", "4s", "5s"] `shouldBe` False
 
     describe "a une straight" $ do
         it "si la main a des cartes qui se suivent" $ do
@@ -51,6 +51,12 @@ spec = do
             categorieDeMain (words "6h 8h 8d 8s Tc") `shouldBe` Brelan
         it "retourne Quinte si la main contient un quinte" $ do
             categorieDeMain (words "3h 4h 5d 6s 7c") `shouldBe` Quinte
+        it "retourne Couleur si la main contient une couleur" $ do
+            categorieDeMain (words "3h 9h 5h Ah 7h") `shouldBe` Couleur
+        it "retourne MainPleine si la main contient une main pleine" $ do
+            categorieDeMain (words "3h 3s 5h 5c 5d") `shouldBe` MainPleine
+        it "retourne Carre si la main contient un carre" $ do
+            categorieDeMain (words "3h 3s 3d 3c 5d") `shouldBe` Carre
 
 
     describe "trouverLaMainLaPlusForte" $ do

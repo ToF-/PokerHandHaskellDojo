@@ -7,7 +7,7 @@ type Carte = String
 type Rang = Integer
 type Couleur = Char
 
-data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | QuinteFlush | QuinteFlushRoyale
+data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | MainPleine | Carre | QuinteFlush | QuinteFlushRoyale
     deriving (Show, Ord, Eq)
 
 double :: Integer -> Integer
@@ -22,8 +22,8 @@ couleur carte = carte!!1
 extraireLaListeDesCouleurs :: Main -> [Couleur]
 extraireLaListeDesCouleurs main = map couleur main
 
-aUneFlush :: Main -> Bool
-aUneFlush main = all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
+aUneCouleur :: Main -> Bool
+aUneCouleur main = all (==couleur (main!!0)) (extraireLaListeDesCouleurs main)
 
 rangTries :: Main -> [Rang]
 rangTries = sort . (map rang)
@@ -52,7 +52,7 @@ rang = valeur . head
         valeur 'A' = 14
 
 aUneQuinteFlush :: Main -> Bool
-aUneQuinteFlush main = aUneFlush main && aUneQuinte main
+aUneQuinteFlush main = aUneCouleur main && aUneQuinte main
 
 aUneRoyalFlush :: Main -> Bool
 aUneRoyalFlush main = aUneQuinteFlush main && minimum (rangTries main) == 10
@@ -74,6 +74,18 @@ aUnBrelan main = aUnBrelanDeRangs (regroupeParRang main)
         aUnBrelanDeRangs [[_,_,_],[_],[_]] = True
         aUnBrelanDeRangs _ = False
 
+aUneMainPleine :: Main -> Bool
+aUneMainPleine main = aUneMainPleineDeRangs (regroupeParRang main)
+    where
+        aUneMainPleineDeRangs [[_,_,_],[_,_]] = True
+        aUneMainPleineDeRangs _ = False
+
+aUnCarre :: Main -> Bool
+aUnCarre main = aUnCarreDeRangs (regroupeParRang main)
+    where
+        aUnCarreDeRangs [[_,_,_,_],[_]] = True
+        aUnCarreDeRangs _ = False
+
 regroupeParRang :: Main -> [[Rang]]
 regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
 
@@ -83,6 +95,9 @@ trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
 categorieDeMain :: Main -> Categorie
 categorieDeMain m | aUnePaire m = Paire
                   | aUneDoublePaire m = DoublePaire
-                  | aUnBrelan m = Brelan
+                  | aUnBrelan m = Brelan
                   | aUneQuinte m = Quinte
+                  | aUneMainPleine m = MainPleine
+                  | aUneCouleur m = Couleur
+                  | aUnCarre m = Carre
                   | otherwise = CarteHaute
