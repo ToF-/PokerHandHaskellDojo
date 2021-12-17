@@ -39,7 +39,8 @@ spec = do
             categorieDeMain (words "3h 3s 3d 3c 5d") `shouldBe` Carre
         it "retourne QuinteFlush si la main contient une Quinte Flush" $ do
             categorieDeMain (words "3d 4d 5d 6d 7d") `shouldBe` QuinteFlush
-
+        it "retourne QuinteFlushRoyale si la main contient une Quinte Flush Royale" $ do
+            categorieDeMain (words "Ad Kd Qd Jd Td") `shouldBe` QuinteFlushRoyale
 
     describe "trouverLaMainLaPlusForte" $ do
         it "retourner QuinteFlushRoyale quand les paramètres sont QuinteFlush, QuinteFlushRoyale" $ do

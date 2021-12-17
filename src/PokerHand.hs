@@ -7,7 +7,7 @@ type Carte = String
 type Rang = Integer
 type Couleur = Char
 
-data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | MainPleine | Carre | QuinteFlush | QuinteFlushRoyale
+data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | MainPleine | Carre | QuinteFlush | QuinteRoyale | QuinteFlushRoyale
     deriving (Show, Ord, Eq)
 
 double :: Integer -> Integer
@@ -64,12 +64,13 @@ trouverLaMainLaPlusForte :: Main -> Main -> Categorie
 trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
 
 categorieDeMain :: Main -> Categorie
-categorieDeMain main = promotion (categorieDeBase (regroupeParRang main)) main
+categorieDeMain main = prendEnCompteLaCouleur (categorieDeBase (regroupeParRang main)) main
 
-promotion :: Categorie -> Main -> Categorie
-promotion CarteHaute main | aUneCouleur main = Couleur
-promotion Quinte main     | aUneCouleur main = QuinteFlush
-promotion autre _ = autre
+prendEnCompteLaCouleur :: Categorie -> Main -> Categorie
+prendEnCompteLaCouleur CarteHaute main | aUneCouleur main = Couleur
+prendEnCompteLaCouleur Quinte main     | aUneCouleur main = QuinteFlush
+prendEnCompteLaCouleur QuinteRoyale main     | aUneCouleur main = QuinteFlushRoyale
+prendEnCompteLaCouleur autre _ = autre
 
 categorieDeBase :: [[Rang]] -> Categorie
 categorieDeBase [[_,_],[_],[_],[_]] = Paire
@@ -78,7 +79,8 @@ categorieDeBase [[_,_,_],[_],[_]] = Brelan
 categorieDeBase [[_,_,_,_],[_]] = Carre
 categorieDeBase [[_,_,_],[_,_]] = MainPleine
 categorieDeBase [[14],[5],[4],[3],[2]] = Quinte
-categorieDeBase [[a],[b],[c],[d],[e]] | a-e == 4 = Quinte 
+categorieDeBase [[14],[13],[12],[11],[10]] = QuinteRoyale
+categorieDeBase [[a],[b],[c],[d],[e]] | a-e == 4 = Quinte
 categorieDeBase _ = CarteHaute
 
 
