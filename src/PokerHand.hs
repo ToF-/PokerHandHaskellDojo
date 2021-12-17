@@ -57,35 +57,6 @@ aUneQuinteFlush main = aUneCouleur main && aUneQuinte main
 aUneRoyalFlush :: Main -> Bool
 aUneRoyalFlush main = aUneQuinteFlush main && minimum (rangTries main) == 10
 
-aUneDoublePaire :: Main -> Bool
-aUneDoublePaire main = aUneDoublePaireDeRangs (regroupeParRang main)
-    where aUneDoublePaireDeRangs [[_,_],[_,_],[_]] = True
-          aUneDoublePaireDeRangs _ = False
-
-aUnePaire :: Main -> Bool
-aUnePaire main = aUnePaireDeRangs (regroupeParRang main)
-    where
-        aUnePaireDeRangs [[_,_],[_],[_],[_]] = True
-        aUnePaireDeRangs _ = False
-
-aUnBrelan :: Main -> Bool
-aUnBrelan main = aUnBrelanDeRangs (regroupeParRang main)
-    where
-        aUnBrelanDeRangs [[_,_,_],[_],[_]] = True
-        aUnBrelanDeRangs _ = False
-
-aUneMainPleine :: Main -> Bool
-aUneMainPleine main = aUneMainPleineDeRangs (regroupeParRang main)
-    where
-        aUneMainPleineDeRangs [[_,_,_],[_,_]] = True
-        aUneMainPleineDeRangs _ = False
-
-aUnCarre :: Main -> Bool
-aUnCarre main = aUnCarreDeRangs (regroupeParRang main)
-    where
-        aUnCarreDeRangs [[_,_,_,_],[_]] = True
-        aUnCarreDeRangs _ = False
-
 regroupeParRang :: Main -> [[Rang]]
 regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
 
@@ -93,11 +64,11 @@ trouverLaMainLaPlusForte :: Main -> Main -> Categorie
 trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
 
 categorieDeMain :: Main -> Categorie
-categorieDeMain m | aUnePaire m = Paire
-                  | aUneDoublePaire m = DoublePaire
-                  | aUnBrelan m = Brelan
-                  | aUneQuinte m = Quinte
-                  | aUneMainPleine m = MainPleine
-                  | aUneCouleur m = Couleur
-                  | aUnCarre m = Carre
-                  | otherwise = CarteHaute
+categorieDeMain main = case regroupeParRang main of
+                       [[_,_],[_],[_],[_]] -> Paire
+                       [[_,_],[_,_],[_]] -> DoublePaire
+                       [[_,_,_],[_],[_]] -> Brelan
+                       [[_,_,_,_],[_]] -> Carre
+                       [[_,_,_],[_,_]] -> MainPleine
+                       _ -> if aUneQuinte main then Quinte else if aUneCouleur main then Couleur else CarteHaute
+
