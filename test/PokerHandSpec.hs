@@ -40,6 +40,14 @@ spec = do
             aUnePaire (words "6h 8h Ad As Tc") `shouldBe` True
             aUnePaire (words "6h 3h 8d As 3c") `shouldBe` True
 
+    describe "categorieDeMain" $ do
+        it "retourne Paire si la main est une paire" $ do
+            categorieDeMain (words "6h 8h 8d As Tc") `shouldBe` Paire
+        it "retourne CarteHaute si la main est une carte haute" $ do
+            categorieDeMain (words "6h 8h 9d As Tc") `shouldBe` CarteHaute
+        it "retourne DoublePaire si la main contient deux paires" $ do
+            categorieDeMain (words "6h 8h 8d As Ac") `shouldBe` DoublePaire
+
     describe "trouverLaMainLaPlusForte" $ do
         it "retourner QuinteFlushRoyale quand les paramètres sont QuinteFlush, QuinteFlushRoyale" $ do
             trouverLaMainLaPlusForte (words "As Ks Ts Jd Qd") (words "Kh Jh Ah Th Qh") `shouldBe` QuinteFlushRoyale
