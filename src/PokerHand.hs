@@ -7,7 +7,7 @@ type Carte = String
 type Rang = Integer
 type Couleur = Char
 
-data HandCategory = Highcard | OnePair |  Straight | Flush | StraightFlush | RoyalFlush
+data Categorie = CarteHaute | Paire |  Quinte | Couleur | QuinteFlush | QuinteFlushRoyale
     deriving (Show, Ord, Eq)
 
 double :: Integer -> Integer
@@ -65,3 +65,7 @@ aUnePaire main = aUnePaireDeRangs (regroupeParRang main)
 
 regroupeParRang :: Main -> [[Rang]]
 regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
+
+trouverLaMainLaPlusForte :: Main -> Main -> Categorie
+trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
+

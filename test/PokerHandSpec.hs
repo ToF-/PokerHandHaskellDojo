@@ -41,4 +41,5 @@ spec = do
             aUnePaire (words "6h 3h 8d As 3c") `shouldBe` True
 
     describe "trouverLaMainLaPlusForte" $ do
-        it ""
+        it "retourner QuinteFlushRoyale quand les paramètres sont QuinteFlush, QuinteFlushRoyale" $ do
+            trouverLaMainLaPlusForte (words "As Ks Ts Jd Qd") (words "Kh Jh Ah Th Qh") `shouldBe` QuinteFlushRoyale
