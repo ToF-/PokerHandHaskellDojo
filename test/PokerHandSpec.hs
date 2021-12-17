@@ -29,12 +29,16 @@ spec = do
             categorieDeMain (words "6h 8h 8d 8s Tc") `shouldBe` Brelan
         it "retourne Quinte si la main contient un quinte" $ do
             categorieDeMain (words "3h 4h 5d 6s 7c") `shouldBe` Quinte
+        it "retourne Quinte si la main contient la quinte commençant par Un" $ do
+            categorieDeMain (words "3h 4h 5d 2s Ac") `shouldBe` Quinte
         it "retourne Couleur si la main contient une couleur" $ do
             categorieDeMain (words "3h 9h 5h Ah 7h") `shouldBe` Couleur
         it "retourne MainPleine si la main contient une main pleine" $ do
             categorieDeMain (words "3h 3s 5h 5c 5d") `shouldBe` MainPleine
         it "retourne Carre si la main contient un carre" $ do
             categorieDeMain (words "3h 3s 3d 3c 5d") `shouldBe` Carre
+        it "retourne QuinteFlush si la main contient une Quinte Flush" $ do
+            categorieDeMain (words "3d 4d 5d 6d 7d") `shouldBe` QuinteFlush
 
 
     describe "trouverLaMainLaPlusForte" $ do

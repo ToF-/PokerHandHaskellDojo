@@ -64,11 +64,21 @@ trouverLaMainLaPlusForte :: Main -> Main -> Categorie
 trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
 
 categorieDeMain :: Main -> Categorie
-categorieDeMain main = case regroupeParRang main of
-                       [[_,_],[_],[_],[_]] -> Paire
-                       [[_,_],[_,_],[_]] -> DoublePaire
-                       [[_,_,_],[_],[_]] -> Brelan
-                       [[_,_,_,_],[_]] -> Carre
-                       [[_,_,_],[_,_]] -> MainPleine
-                       _ -> if aUneQuinte main then Quinte else if aUneCouleur main then Couleur else CarteHaute
+categorieDeMain main = promotion (categorieDeBase (regroupeParRang main)) main
+
+promotion :: Categorie -> Main -> Categorie
+promotion CarteHaute main | aUneCouleur main = Couleur
+promotion Quinte main     | aUneCouleur main = QuinteFlush
+promotion autre _ = autre
+
+categorieDeBase :: [[Rang]] -> Categorie
+categorieDeBase [[_,_],[_],[_],[_]] = Paire
+categorieDeBase [[_,_],[_,_],[_]] = DoublePaire
+categorieDeBase [[_,_,_],[_],[_]] = Brelan
+categorieDeBase [[_,_,_,_],[_]] = Carre
+categorieDeBase [[_,_,_],[_,_]] = MainPleine
+categorieDeBase [[14],[5],[4],[3],[2]] = Quinte
+categorieDeBase [[a],[b],[c],[d],[e]] | a-e == 4 = Quinte 
+categorieDeBase _ = CarteHaute
+
 
