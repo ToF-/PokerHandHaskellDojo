@@ -59,3 +59,9 @@ spec = do
             compareMain (words "6h 8h 8d Ks 2c") (words "6h 8h 8d Js 2c") `shouldBe` GT
         it "compare deux mains qui sont identiques" $ do
             compareMain (words "9s 9s 9s 9s 5h") (words "9h 9s 9d 9c 5d") `shouldBe` EQ
+        it "compare deux mains de Carte Haute" $ do
+            compareMain (words "6s 8c 9c Ac Th") (words "6h 8h 9d As Tc") `shouldBe` EQ
+
+    describe "meilleureMain" $ do
+        it "retourner la meilleure main de 5 parmi 7" $ do
+            meilleureMain (words "Kh Jh Ah Th Qh 2c 2s") `shouldBe` (words "Ah Kh Qh Jh Th")
