@@ -62,9 +62,8 @@ trouverLaMainLaPlusForte :: Main -> Main -> Categorie
 trouverLaMainLaPlusForte m n = max (categorieDeMain m) (categorieDeMain n)
 
 compareMain :: Main -> Main -> Ordering
-compareMain m n | (compare `on` categorieDeMain) m n == EQ = LT
+compareMain m n | (compare `on` categorieDeMain) m n == EQ = (compare `on` rangTries) m n
 compareMain m n = (compare `on` categorieDeMain) m n
-
 
 categorieDeMain :: Main -> Categorie
 categorieDeMain main = prendEnCompteLaCouleur (categorieDeBase (regroupeParRang main)) main
