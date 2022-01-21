@@ -8,10 +8,7 @@ type Rang = Integer
 type Couleur = Char
 
 data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | MainPleine | Carre | QuinteFlush | QuinteRoyale | QuinteFlushRoyale
-    deriving (Show, Ord, Eq)
-
-double :: Integer -> Integer
-double x = 5
+    deriving (Show,Eq)
 
 estPlusPetite :: Ord a => a -> a -> Bool
 estPlusPetite = (<)
