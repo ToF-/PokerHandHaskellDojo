@@ -1,6 +1,7 @@
 module PokerHand where
 import Data.List (sort,sortBy,group)
 import Data.Ord (comparing)
+import Data.Function (on)
 
 type Main = [String]
 type Carte = String
@@ -59,6 +60,9 @@ regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
 
 trouverLaMainLaPlusForte :: Main -> Main -> Categorie
 trouverLaMainLaPlusForte m n = max (categorieDeMain m) (categorieDeMain n)
+
+compareMain :: Main -> Main -> Ordering
+compareMain = compare `on` categorieDeMain
 
 categorieDeMain :: Main -> Categorie
 categorieDeMain main = prendEnCompteLaCouleur (categorieDeBase (regroupeParRang main)) main

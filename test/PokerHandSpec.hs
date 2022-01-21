@@ -47,3 +47,11 @@ spec = do
             trouverLaMainLaPlusForte (words "9s Ks Ts Js Qs") (words "Kh Jh Ah Th Qh") `shouldBe` QuinteFlushRoyale
         it "retourner QuinteFlush quand les paramètres sont QuinteFlush, Carre" $ do
             trouverLaMainLaPlusForte (words "9s Ks Ts Js Qs") (words "3h 3s 3d 3c 5d") `shouldBe` QuinteFlush
+
+        it "retourne Carre quand les deux mains sont des Carre" $ do
+            trouverLaMainLaPlusForte (words "9s 9s 9s 9s Qh") (words "3h 3s 3d 3c 5d") `shouldBe` Carre
+
+    describe "compareMains" $ do
+        it "compare une Quinte Flush et un Carre" $ do
+            compareMain (words "9s Ks Ts Js Qs") (words "3h 3s 3d 3c 5d")  `shouldBe` GT
+
