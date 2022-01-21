@@ -44,4 +44,6 @@ spec = do
 
     describe "trouverLaMainLaPlusForte" $ do
         it "retourner QuinteFlushRoyale quand les paramètres sont QuinteFlush, QuinteFlushRoyale" $ do
-            trouverLaMainLaPlusForte (words "As Ks Ts Jd Qd") (words "Kh Jh Ah Th Qh") `shouldBe` QuinteFlushRoyale
+            trouverLaMainLaPlusForte (words "9s Ks Ts Js Qs") (words "Kh Jh Ah Th Qh") `shouldBe` QuinteFlushRoyale
+        it "retourner QuinteFlush quand les paramètres sont QuinteFlush, Carre" $ do
+            trouverLaMainLaPlusForte (words "9s Ks Ts Js Qs") (words "3h 3s 3d 3c 5d") `shouldBe` QuinteFlush

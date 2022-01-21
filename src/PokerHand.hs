@@ -8,7 +8,7 @@ type Rang = Integer
 type Couleur = Char
 
 data Categorie = CarteHaute | Paire | DoublePaire |  Brelan | Quinte | Couleur | MainPleine | Carre | QuinteFlush | QuinteRoyale | QuinteFlushRoyale
-    deriving (Show,Eq)
+    deriving (Show,Eq, Ord)
 
 estPlusPetite :: Ord a => a -> a -> Bool
 estPlusPetite = (<)
@@ -58,7 +58,7 @@ regroupeParRang :: Main -> [[Rang]]
 regroupeParRang = reverse . sortBy (comparing length) . group . rangTries
 
 trouverLaMainLaPlusForte :: Main -> Main -> Categorie
-trouverLaMainLaPlusForte _ _ = QuinteFlushRoyale
+trouverLaMainLaPlusForte m n = max (categorieDeMain m) (categorieDeMain n)
 
 categorieDeMain :: Main -> Categorie
 categorieDeMain main = prendEnCompteLaCouleur (categorieDeBase (regroupeParRang main)) main
@@ -79,5 +79,4 @@ categorieDeBase [[14],[5],[4],[3],[2]] = Quinte
 categorieDeBase [[14],[13],[12],[11],[10]] = QuinteRoyale
 categorieDeBase [[a],[b],[c],[d],[e]] | a-e == 4 = Quinte
 categorieDeBase _ = CarteHaute
-
 
