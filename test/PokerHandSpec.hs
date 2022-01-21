@@ -53,5 +53,9 @@ spec = do
 
     describe "compareMains" $ do
         it "compare une Quinte Flush et un Carre" $ do
-            compareMain (words "9s Ks Ts Js Qs") (words "3h 3s 3d 3c 5d")  `shouldBe` GT
+            compareMain (words "9s Ks Ts Js Qs") (words "3h 3s 3d 3c 5d") `shouldBe` GT
+        it "compare une Paire de 8 + J et une Paire de 8 + K" $ do
+            compareMain (words "6h 8h 8d Js 2c") (words "6h 8h 8d Ks 2c") `shouldBe` LT
+        it "compare deux mains qui sont identiques" $ do
+            compareMain (words "9s 9s 9s 9s 5h") (words "9h 9s 9d 9c 5d") `shouldBe` EQ
 
