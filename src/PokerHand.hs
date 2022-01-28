@@ -85,5 +85,9 @@ categorieDeBase [[14],[13],[12],[11],[10]] = QuinteRoyale
 categorieDeBase [[a],[b],[c],[d],[e]] | a-e == 4 = Quinte
 categorieDeBase _ = CarteHaute
 
+mainTriee :: Main -> Main
+mainTriee main = sortBy (\m n -> flip compare (rang m) (rang n)) main
+
 meilleureMain :: Main -> Main
-meilleureMain main = head $ filter (\s -> length s == 5) (subsequences main)
+meilleureMain = mainTriee . last . sortBy compareMain . filter (\s -> length s == 5) . subsequences
+

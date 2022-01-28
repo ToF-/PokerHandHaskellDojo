@@ -1,6 +1,7 @@
 module PokerHandSpec where
 import Test.Hspec
 import PokerHand
+import Data.List (sort)
 
 spec :: Spec
 spec = do
@@ -64,5 +65,8 @@ spec = do
 
     describe "meilleureMain" $ do
         it "retourner la meilleure main de 5 parmi 7" $ do
-            meilleureMain (words "Kh Jh Ah Th Qh 2c 2s") `shouldBe` (words "Ah Kh Qh Jh Th")
-            meilleureMain (words "Kh Jh 9h Th Qh 2c 2s") `shouldBe` (words "Kh Qh Jh Th 9h")
+            meilleureMain (words "Kh Jh Ah Th Qh 2c 2s") `shouldBe` words "Ah Kh Qh Jh Th"
+            meilleureMain (words "Kh Jh 9h Th Qh 2c 2s") `shouldBe` words "Kh Qh Jh Th 9h"
+            meilleureMain (words "Kh Jd 8d Th Qh 2c 2s") `shouldBe` ["Kh","Qh","Jd","2c","2s"]
+
+
