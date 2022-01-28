@@ -63,9 +63,20 @@ spec = do
         it "compare deux mains de Carte Haute" $ do
             compareMain (words "6s 8c 9c Ac Th") (words "6h 8h 9d As Tc") `shouldBe` EQ
 
-    describe "meilleureMain" $ do
-        it "retourner la meilleure main de 5 parmi 7" $ do
+    describe "meilleureCombinaison" $ do
+        it "retourne la meilleure main de 5 parmi 7" $ do
             meilleureCombinaison (words "Kh Jh Ah Th Qh 2c 2s") `shouldBe` (Just (words "Ah Kh Qh Jh Th"))
             meilleureCombinaison (words "Kh Jh 9h Th Qh 2c 2s") `shouldBe` (Just (words "Kh Qh Jh Th 9h"))
             meilleureCombinaison (words "Kh Jd 8d Th Qh 2c 2s") `shouldBe` (Just ["Kh","Qh","Jd","2c","2s"])
             meilleureCombinaison (words "5h 6d") `shouldBe` Nothing
+
+    describe "classement" $ do
+        it "trie la liste par meilleure combinaison" $ do
+            classement ([
+                words "Kc 9s Ks Kd 9d 3c 6d",
+                words "9c Ah Ks Kd 9d 3c 6d",
+                words "Ac Qc Ks Kd 9d 3c",
+                words "9h 5s",
+                words "4d 2d Ks Kd 9d 3c 6d",
+                words "7s Ts Ks Kd 9d"])
+            `shouldBe` []

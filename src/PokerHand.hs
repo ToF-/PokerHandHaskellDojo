@@ -93,3 +93,5 @@ meilleureCombinaison :: Cartes -> Maybe Main
 meilleureCombinaison cartes | length cartes == 7 = (Just . mainTriee . last . sortBy compareMain . filter (\s -> length s == 5) . subsequences) cartes
 meilleureCombinaison _ = Nothing
 
+classement :: [Cartes] -> [Cartes]
+classement = id
