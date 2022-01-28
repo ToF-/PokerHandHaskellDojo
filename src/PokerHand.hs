@@ -5,6 +5,7 @@ import Data.Function (on)
 
 type Main = [String]
 type Carte = String
+type Cartes = [String]
 type Rang = Integer
 type Couleur = Char
 
@@ -88,6 +89,7 @@ categorieDeBase _ = CarteHaute
 mainTriee :: Main -> Main
 mainTriee main = sortBy (\m n -> flip compare (rang m) (rang n)) main
 
-meilleureMain :: Main -> Main
-meilleureMain = mainTriee . last . sortBy compareMain . filter (\s -> length s == 5) . subsequences
+meilleureCombinaison :: Cartes -> Maybe Main
+meilleureCombinaison cartes | length cartes == 7 = (Just . mainTriee . last . sortBy compareMain . filter (\s -> length s == 5) . subsequences) cartes
+meilleureCombinaison _ = Nothing
 
