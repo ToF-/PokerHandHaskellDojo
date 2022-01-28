@@ -62,6 +62,8 @@ spec = do
             compareMain (words "9s 9s 9s 9s 5h") (words "9h 9s 9d 9c 5d") `shouldBe` EQ
         it "compare deux mains de Carte Haute" $ do
             compareMain (words "6s 8c 9c Ac Th") (words "6h 8h 9d As Tc") `shouldBe` EQ
+        it "compare main pleine et couleur" $ do
+            compareMain ["Kc","9s","Ks","Kd","9d"] ["4d","2d","Kd","9d","6d"] `shouldBe` GT
 
     describe "meilleureCombinaison" $ do
         it "retourne la meilleure main de 5 parmi 7" $ do
@@ -69,14 +71,15 @@ spec = do
             meilleureCombinaison (words "Kh Jh 9h Th Qh 2c 2s") `shouldBe` (Just (words "Kh Qh Jh Th 9h"))
             meilleureCombinaison (words "Kh Jd 8d Th Qh 2c 2s") `shouldBe` (Just ["Kh","Qh","Jd","2c","2s"])
             meilleureCombinaison (words "5h 6d") `shouldBe` Nothing
+            meilleureCombinaison ["Kc","9s","Ks","Kd","9d","3c","6d"] `shouldBe` (Just ["Kc","Ks","Kd","9s","9d"])
+            meilleureCombinaison ["4d","2d","Ks","Kd","9d","3c","6d"] `shouldBe` (Just ["Kd","9d","6d","4d","2d"])
 
     describe "classement" $ do
         it "trie la liste par meilleure combinaison" $ do
             classement ([
                 words "Kc 9s Ks Kd 9d 3c 6d",
-                words "9c Ah Ks Kd 9d 3c 6d",
-                words "Ac Qc Ks Kd 9d 3c",
-                words "9h 5s",
-                words "4d 2d Ks Kd 9d 3c 6d",
-                words "7s Ts Ks Kd 9d"])
-            `shouldBe` []
+                words "4d 2d Ks Kd 9d 3c 6d"])
+            `shouldBe` [
+            ["4d","2d","Ks","Kd","9d","3c","6d"],
+            ["Kc","9s","Ks","Kd","9d","3c","6d"]]
+
