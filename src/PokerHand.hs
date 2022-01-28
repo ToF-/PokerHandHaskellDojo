@@ -1,5 +1,5 @@
 module PokerHand where
-import Data.List (sort,sortBy,group)
+import Data.List (sort,sortBy,group, subsequences)
 import Data.Ord (comparing)
 import Data.Function (on)
 
@@ -85,3 +85,5 @@ categorieDeBase [[14],[13],[12],[11],[10]] = QuinteRoyale
 categorieDeBase [[a],[b],[c],[d],[e]] | a-e == 4 = Quinte
 categorieDeBase _ = CarteHaute
 
+meilleureMain :: Main -> Main
+meilleureMain main = head $ filter (\s -> length s == 5) (subsequences main)
