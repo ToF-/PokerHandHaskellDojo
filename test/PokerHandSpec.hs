@@ -76,13 +76,18 @@ spec = do
 
     describe "classement" $ do
         it "trie la liste par meilleure combinaison" $ do
-            (categorieDeMain <$> meilleureCombinaison (words "Kc 9s Ks Kd 9d 3c 6d")) `shouldBe` (Just MainPleine)
-            (categorieDeMain <$> meilleureCombinaison (words "4d 2d Ks Kd 9d 3c 6d")) `shouldBe` (Just Couleur)
-            Just MainPleine > Just Couleur `shouldBe` True
             classement ([
-                words "Kc 9s Ks Kd 9d 3c 6d", --full house
-                words "4d 2d Ks Kd 9d 3c 6d"]) --flush
+                    words "Kc 9s Ks Kd 9d 3c 6d",
+                    words "9c Ah Ks Kd 9d 3c 6d",
+                    words "Ac Qc Ks Kd 9d 3c",
+                    words "9h 5s",
+                    words "4d 2d Ks Kd 9d 3c 6d",
+                    words "7s Ts Ks Kd 9d"])
                 `shouldBe` [
-                ["4d","2d","Ks","Kd","9d","3c","6d"], --flush est plus petit que le
-                ["Kc","9s","Ks","Kd","9d","3c","6d"]] --full house
+                    words "Ac Qc Ks Kd 9d 3c",
+                    words "9h 5s",
+                    words "7s Ts Ks Kd 9d",
+                    words "9c Ah Ks Kd 9d 3c 6d",
+                    words "4d 2d Ks Kd 9d 3c 6d",
+                    words "Kc 9s Ks Kd 9d 3c 6d"]
 
