@@ -94,4 +94,4 @@ meilleureCombinaison cartes | length cartes == 7 = (Just . mainTriee . last . so
 meilleureCombinaison _ = Nothing
 
 classement :: [Cartes] -> [Cartes]
-classement = sortBy (\s t -> compare ((fmap categorieDeMain . meilleureCombinaison) s) ((fmap categorieDeMain . meilleureCombinaison) t))
+classement = sortBy (comparing (fmap categorieDeMain . meilleureCombinaison))
