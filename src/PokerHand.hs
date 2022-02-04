@@ -97,5 +97,16 @@ classement :: [Cartes] -> [Cartes]
 classement = sortBy (comparing (fmap categorieDeMain . meilleureCombinaison))
 
 libelle :: Cartes -> String
-libelle cs | (fmap categorieDeMain . meilleureCombinaison) cs == Just MainPleine = concat (intersperse " " cs) ++ " Full House"
-libelle cs | (fmap categorieDeMain . meilleureCombinaison) cs == Just Couleur = concat (intersperse " " cs) ++ " Flush"
+libelle cs = concat (intersperse " " cs) ++ libelleCategorie ((fmap categorieDeMain . meilleureCombinaison) cs)
+    where
+    libelleCategorie (Just Paire) = " Pair"
+    libelleCategorie (Just CarteHaute) = " Highcard"
+    libelleCategorie (Just DoublePaire) = " Two Pairs"
+    libelleCategorie (Just Brelan) = " Three Of A Kind"
+    libelleCategorie (Just Quinte) = " Straight"
+    libelleCategorie (Just Couleur) = " Flush"
+    libelleCategorie (Just MainPleine) = " Full House"
+    libelleCategorie (Just Carre) = " Four Of A Kind"
+    libelleCategorie (Just QuinteFlush) = " Straight Flush"
+    libelleCategorie (Just QuinteFlushRoyale) = " Royal Flush"
+    libelleCategorie Nothing = ""

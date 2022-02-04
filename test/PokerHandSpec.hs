@@ -95,5 +95,16 @@ spec = do
 
     describe "libellé d'un groupe de 7 cartes" $ do
         it "ajoute le libellé d'une main" $ do
-            libelle (words "Kc 9s Ks Kd 9d 3c 6d") `shouldBe` "Kc 9s Ks Kd 9d 3c 6d Full House"
-            libelle (words "4d 2d Ks Kd 9d 3c 6d") `shouldBe` "4d 2d Ks Kd 9d 3c 6d Flush"
+            libelle (words "6h 8h 8d As Tc 2c 5d") `shouldBe` "6h 8h 8d As Tc 2c 5d Pair"
+            libelle (words "6h 8h 9d As Tc 2c 5d") `shouldBe` "6h 8h 9d As Tc 2c 5d Highcard"
+            libelle (words "6h 8h 8d As Ac 2c 5d") `shouldBe` "6h 8h 8d As Ac 2c 5d Two Pairs"
+            libelle (words "6h 8h 8d 8s Tc 2c 5d") `shouldBe` "6h 8h 8d 8s Tc 2c 5d Three Of A Kind"
+            libelle (words "3h 4h 5d 6s 7c 2c 5d") `shouldBe` "3h 4h 5d 6s 7c 2c 5d Straight"
+            libelle (words "3h 9h 5h Ah 7h 2c 5d") `shouldBe` "3h 9h 5h Ah 7h 2c 5d Flush"
+            libelle (words "3h 3s 5h 5c 5d 2c Ad") `shouldBe` "3h 3s 5h 5c 5d 2c Ad Full House"
+            libelle (words "3h 3s 3d 3c 5d 2c Ad") `shouldBe` "3h 3s 3d 3c 5d 2c Ad Four Of A Kind"
+            libelle (words "3d 4d 5d 6d 7d As Js") `shouldBe` "3d 4d 5d 6d 7d As Js Straight Flush"
+            libelle (words "Ad Kd Qd Jd Td 2s 3c") `shouldBe` "Ad Kd Qd Jd Td 2s 3c Royal Flush"
+            libelle (words "Ad Kd Qd 3c") `shouldBe` "Ad Kd Qd 3c"
+
+
