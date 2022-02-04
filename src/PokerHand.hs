@@ -1,5 +1,5 @@
 module PokerHand where
-import Data.List (sort,sortBy,group, subsequences)
+import Data.List (sort,sortBy,group, subsequences, intersperse)
 import Data.Ord (comparing)
 import Data.Function (on)
 
@@ -97,4 +97,5 @@ classement :: [Cartes] -> [Cartes]
 classement = sortBy (comparing (fmap categorieDeMain . meilleureCombinaison))
 
 libelle :: Cartes -> String
-libelle = undefined
+libelle cs | (fmap categorieDeMain . meilleureCombinaison) cs == Just MainPleine = concat (intersperse " " cs) ++ " Full House"
+libelle cs | (fmap categorieDeMain . meilleureCombinaison) cs == Just Couleur = concat (intersperse " " cs) ++ " Flush"
