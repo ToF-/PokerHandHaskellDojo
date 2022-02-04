@@ -58,6 +58,8 @@ spec = do
         it "compare une Paire de 8 + J et une Paire de 8 + K" $ do
             compareMain (words "6h 8h 8d Js 2c") (words "6h 8h 8d Ks 2c") `shouldBe` LT
             compareMain (words "6h 8h 8d Ks 2c") (words "6h 8h 8d Js 2c") `shouldBe` GT
+            compareMain (words "6h 8h 8d Ks 2c") (words "5h 8h 8d Ks 2c") `shouldBe` GT
+            compareMain (words "6h 8h 8d Ks 3c") (words "6h 8h 8d Ks 2c") `shouldBe` GT
         it "compare deux mains qui sont identiques" $ do
             compareMain (words "9s 9s 9s 9s 5h") (words "9h 9s 9d 9c 5d") `shouldBe` EQ
         it "compare deux mains de Carte Haute" $ do
@@ -91,3 +93,6 @@ spec = do
                     words "4d 2d Ks Kd 9d 3c 6d",
                     words "Kc 9s Ks Kd 9d 3c 6d"]
 
+    describe "libellé d'un groupe de 7 cartes" $ do
+        it "ajoute le libellé d'une main" $ do
+            libelle (words "Kc 9s Ks Kd 9d 3c 6d") `shouldBe` "Kc 9s Ks Kd 9d 3c 6d Full House"

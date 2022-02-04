@@ -95,3 +95,6 @@ meilleureCombinaison _ = Nothing
 
 classement :: [Cartes] -> [Cartes]
 classement = sortBy (comparing (fmap categorieDeMain . meilleureCombinaison))
+
+libelle :: Cartes -> String
+libelle = undefined
