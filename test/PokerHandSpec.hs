@@ -86,12 +86,12 @@ spec = do
                     words "4d 2d Ks Kd 9d 3c 6d",
                     words "7s Ts Ks Kd 9d"])
                 `shouldBe` [
-                    "Ac Qc Ks Kd 9d 3c",
-                    "9h 5s",
-                    "7s Ts Ks Kd 9d",
-                    "9c Ah Ks Kd 9d 3c 6d Two Pairs",
-                    "4d 2d Ks Kd 9d 3c 6d Flush",
-                    "Kc 9s Ks Kd 9d 3c 6d Full House (winner)"]
+                    ("Ac Qc Ks Kd 9d 3c", 2),
+                    ("9h 5s", 3),
+                    ("7s Ts Ks Kd 9d", 5),
+                    ("9c Ah Ks Kd 9d 3c 6d Two Pairs", 1),
+                    ("4d 2d Ks Kd 9d 3c 6d Flush", 4),
+                    ("Kc 9s Ks Kd 9d 3c 6d Full House (winner)", 0)]
 
     describe "resultat" $ do
         it "restitue le résultat de la manche" $ do
