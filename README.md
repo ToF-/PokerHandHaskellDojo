@@ -47,4 +47,3 @@ If the hand involves fewer than five cards, (such as two pair or three of a kind
     7s Ts Ks Kd 9d
 
 ## TODO
-Debug dernier test

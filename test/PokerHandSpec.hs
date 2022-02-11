@@ -86,12 +86,12 @@ spec = do
                     words "4d 2d Ks Kd 9d 3c 6d",
                     words "7s Ts Ks Kd 9d"])
                 `shouldBe` [
-                    words "Ac Qc Ks Kd 9d 3c",
-                    words "9h 5s",
-                    words "7s Ts Ks Kd 9d",
-                    words "9c Ah Ks Kd 9d 3c 6d",
-                    words "4d 2d Ks Kd 9d 3c 6d",
-                    words "Kc 9s Ks Kd 9d 3c 6d"]
+                    "Ac Qc Ks Kd 9d 3c",
+                    "9h 5s",
+                    "7s Ts Ks Kd 9d",
+                    "9c Ah Ks Kd 9d 3c 6d Two Pairs",
+                    "4d 2d Ks Kd 9d 3c 6d Flush",
+                    "Kc 9s Ks Kd 9d 3c 6d Full House"]
 
     describe "libellé d'un groupe de 7 cartes" $ do
         it "ajoute le libellé d'une main" $ do

@@ -6,6 +6,7 @@ import Data.Function (on)
 type Main = [String]
 type Carte = String
 type Cartes = [String]
+type CartesLibelles = String
 type Rang = Integer
 type Couleur = Char
 
@@ -93,8 +94,8 @@ meilleureCombinaison :: Cartes -> Maybe Main
 meilleureCombinaison cartes | length cartes == 7 = (Just . mainTriee . last . sortBy compareMain . filter (\s -> length s == 5) . subsequences) cartes
 meilleureCombinaison _ = Nothing
 
-classement :: [Cartes] -> [Cartes]
-classement = sortBy (comparing (fmap categorieDeMain . meilleureCombinaison))
+classement :: [Cartes] -> [CartesLibelles]
+classement listeDeCartes = map libelle (sortBy (comparing (fmap categorieDeMain . meilleureCombinaison)) listeDeCartes)
 
 libelle :: Cartes -> String
 libelle cs = concat (intersperse " " cs) ++ libelleCategorie ((fmap categorieDeMain . meilleureCombinaison) cs)
