@@ -91,7 +91,7 @@ spec = do
                     "7s Ts Ks Kd 9d",
                     "9c Ah Ks Kd 9d 3c 6d Two Pairs",
                     "4d 2d Ks Kd 9d 3c 6d Flush",
-                    "Kc 9s Ks Kd 9d 3c 6d Full House"]
+                    "Kc 9s Ks Kd 9d 3c 6d Full House (winner)"]
 
     describe "libellé d'un groupe de 7 cartes" $ do
         it "ajoute le libellé d'une main" $ do
