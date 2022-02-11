@@ -116,3 +116,6 @@ libelle cs = concat (intersperse " " cs) ++ libelleCategorie ((fmap categorieDeM
     libelleCategorie (Just QuinteFlush) = " Straight Flush"
     libelleCategorie (Just QuinteFlushRoyale) = " Royal Flush"
     libelleCategorie Nothing = ""
+
+resultat :: [Cartes] -> [CartesLibelles]
+

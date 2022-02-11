@@ -93,6 +93,25 @@ spec = do
                     "4d 2d Ks Kd 9d 3c 6d Flush",
                     "Kc 9s Ks Kd 9d 3c 6d Full House (winner)"]
 
+    describe "resultat" $ do
+        it "restitue le résultat de la manche" $ do
+            resultat ([
+                    words "Kc 9s Ks Kd 9d 3c 6d",
+                    words "9c Ah Ks Kd 9d 3c 6d",
+                    words "Ac Qc Ks Kd 9d 3c",
+                    words "9h 5s",
+                    words "4d 2d Ks Kd 9d 3c 6d",
+                    words "7s Ts Ks Kd 9d"])
+                `shouldBe` [
+                    "Kc 9s Ks Kd 9d 3c 6d Full House (winner)",
+                    "9c Ah Ks Kd 9d 3c 6d Two Pairs",
+                    "Ac Qc Ks Kd 9d 3c",
+                    "9h 5s",
+                    "4d 2d Ks Kd 9d 3c 6d Flush",
+                    "7s Ts Ks Kd 9d"
+                    ]
+
+
     describe "libellé d'un groupe de 7 cartes" $ do
         it "ajoute le libellé d'une main" $ do
             libelle (words "6h 8h 8d As Tc 2c 5d") `shouldBe` "6h 8h 8d As Tc 2c 5d Pair"
