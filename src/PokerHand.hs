@@ -94,10 +94,10 @@ meilleureCombinaison :: Cartes -> Maybe Main
 meilleureCombinaison cartes | length cartes == 7 = (Just . mainTriee . last . sortBy compareMain . filter (\s -> length s == 5) . subsequences) cartes
 meilleureCombinaison _ = Nothing
 
+-- en entree : la liste des résultats triées par ordre croissant de valeur
 ajouterLeLabelGagnant :: [(CartesLibelles, Integer)] -> [(CartesLibelles, Integer)]
-ajouterLeLabelGagnant [(e,i)] = [(e++ " (winner)", i)]
-ajouterLeLabelGagnant (l:ls) = l: ajouterLeLabelGagnant ls
-
+ajouterLeLabelGagnant [(e,i)] = [(e <> " (winner)", i)]
+ajouterLeLabelGagnant (l:ls) = l : ajouterLeLabelGagnant ls
 
 classement :: [Cartes] -> [(CartesLibelles, Integer)]
 classement listeDeCartes = ajouterLeLabelGagnant
@@ -121,4 +121,4 @@ libelle cs = concat (intersperse " " cs) ++ libelleCategorie ((fmap categorieDeM
     libelleCategorie Nothing = ""
 
 resultat :: [Cartes] -> [CartesLibelles]
-resultat = undefined
+resultat = map fst . sortBy (comparing snd) . classement
