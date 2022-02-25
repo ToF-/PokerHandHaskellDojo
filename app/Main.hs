@@ -13,4 +13,6 @@ litEntree = do
 main :: IO ()
 main = do
     entree <- litEntree
-    print entree
+    let sortie = resultat (map words entree)
+    putStrLn $ unlines sortie
+
